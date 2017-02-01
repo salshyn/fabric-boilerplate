@@ -13,7 +13,7 @@ var logger = shim.NewLogger("query")
 
 var Functions = map[string]func(shim.ChaincodeStubInterface,[]string)([]byte, error) {
     "authenticate": authenticate,
-    "get_user": Get_user,
+    "get_user": get_user,
     "get_thing": get_thing,
     "get_all_things": get_all_things,
 }
@@ -70,7 +70,7 @@ func authenticate(stub shim.ChaincodeStubInterface, args []string) ([]byte, erro
 	return []byte(str), nil
 }
 
-func Get_user(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func get_user(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var item data.User
 	err := utils.Get(stub, &item, args[0])
 	if err != nil { return nil, errors.Wrap(err, "Could not get user") }
@@ -89,7 +89,7 @@ func get_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) 
 }
 
 func get_all_things(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	item, err := Get_user(stub, []string{args[0]})
+	item, err := get_user(stub, []string{args[0]})
 	if err != nil {
 		return nil, errors.Wrap(err, "Could not get user "+args[0])
 	}

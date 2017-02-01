@@ -4,7 +4,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"encoding/json"
 	"build-chaincode/data"
-	"build-chaincode/query"
+	"build-chaincode/utils"
 )
 
 var logger = shim.NewLogger("invoke")
@@ -84,16 +84,10 @@ func add_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) 
 	if err != nil { return nil, err }
 
 	// Fetch user
-	u, err := query.Get_user(stub, []string{args[2]})
+	var user data.User
+	err = utils.Get(stub, &user, args[2])
 	if err != nil {
 		return nil, errors.Wrap(err, "Could not get user "+args[2])
-	}
-
-	// Unmarshal user JSON to User model
-	var user data.User
-	err = json.Unmarshal(u, &user)
-	if err != nil {
-		return nil, errors.Wrap(err, "Could not unmarshal user")
 	}
 
 	// Attach thing id to user's Things
