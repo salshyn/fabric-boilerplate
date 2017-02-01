@@ -69,7 +69,7 @@ exports.addThing = function (req, res) {
     console.log("-- Adding thing --");
 
     const functionName = "add_thing";
-    const args = [req.body.id, JSON.stringify(req.body)];
+    const args = [req.body.id, JSON.stringify(req.body), req.userId];
 
     BlockchainService.invoke(functionName, args, req.userId)
         .then(function (thing) {

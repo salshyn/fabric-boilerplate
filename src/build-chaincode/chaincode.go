@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"os"
 	"build-chaincode/query"
 	"build-chaincode/invoke"
 )
@@ -34,10 +33,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 // Main - starts up the chaincode
 func main() {
-	logger.SetLevel(shim.LogInfo)
-
-	logLevel, _ := shim.LogLevel(os.Getenv("SHIM_LOGGING_LEVEL"))
-	shim.SetLoggingLevel(logLevel)
+	logger.SetLevel(shim.LogDebug)
+	shim.SetLoggingLevel(shim.LogDebug)
 
 	err := shim.Start(new(SimpleChaincode))
 	if err != nil { logger.Errorf("Error starting chaincode:", err) }
