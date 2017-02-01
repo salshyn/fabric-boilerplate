@@ -25,7 +25,7 @@ app.controller("LoginController",["$location", "LoginService", "$localStorage", 
 
                     // store the token in localStorage
                     $localStorage.token = result.token;
-                    
+
                     delete $localStorage.selectedThing;
 
                     $location.path("/master");

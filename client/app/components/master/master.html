@@ -1,7 +1,15 @@
 <header-bar></header-bar>
-<div class="master-overview">
+<div>
     <div ng-repeat="thing in master.things" ng-click="master.openThing(thing.id)">
-        {{thing.id}} - {{thing.description}}
-    </div> 
+        <div>
+            {{thing.id}} - {{thing.description}}
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Thing ID:          <input class="form-control" type="input" ng-model="thing.id" required /></label><br />
+      <label class="control-label">Thing Description: <input class="form-control" type="input" ng-model="thing.description" required/></label><br />
+      <input type="submit" class="btn btn-primary btn-md" ng-click="master.addThing(thing)" value="Add Thing" />
+    </div>
 </div>
 <footer-bar></footer-bar>

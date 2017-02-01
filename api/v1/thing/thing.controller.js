@@ -26,8 +26,8 @@ exports.getAllThings = function(req, res) {
         }
     }).catch(function(err){
         console.log("Error", err);
-        res.sendStatus(500);   
-    }); 
+        res.sendStatus(500);
+    });
 };
 
 /*
@@ -43,7 +43,7 @@ exports.getThing = function(req, res) {
 
     const functionName = "get_thing";
     const args = [req.params.thingId];
-    
+
     BlockchainService.query(functionName,args,req.userId).then(function(thing){
         if (!thing) {
             res.json([]);
@@ -53,8 +53,8 @@ exports.getThing = function(req, res) {
         }
     }).catch(function(err){
         console.log("Error", err);
-        res.sendStatus(500);   
-    }); 
+        res.sendStatus(500);
+    });
 };
 
 /*
@@ -67,15 +67,22 @@ exports.getThing = function(req, res) {
 */
 exports.addThing = function(req, res) {
     console.log("-- Adding thing --")
-      
+
     const functionName = "add_thing";
     const args = [req.body.thingId, JSON.stringify(req.body.thing)];
-    
+
+    console.log('----------------------------------------------------------');
+    console.log(functionName);
+    console.log(args);
+    console.log(req.userId);
+    console.log('----------------------------------------------------------');
+
+    //return false;
+
     BlockchainService.invoke(functionName,args,req.userId).then(function(thing){
         res.sendStatus(200);
     }).catch(function(err){
         console.log("Error", err);
-        res.sendStatus(500);   
-    }); 
+        res.sendStatus(500);
+    });
 };
-
