@@ -42,8 +42,8 @@ app.service('ThingsService', ["$q", "$http", "$localStorage", function ($q, $htt
                 method: 'POST',
                 url: '/api/v1/thing/',
                 data: {
-                  "thingId": $localStorage.thingToAdd.id,
-                  "thing": $localStorage.thingToAdd.description
+                  "id": $localStorage.thingToAdd.id,
+                  "description": $localStorage.thingToAdd.description
                 }
             }).then(function success(response) {
                 deferred.resolve(response.data);

@@ -14,9 +14,6 @@ app.config(function ($routeProvider, $httpProvider) {
             things: function (ThingsService) {
                 return ThingsService.getAllThings();
             }
-            // addThing: function (ThingsService) {
-            //     return ThingsService.addThing();
-            // }
         }
     })
 

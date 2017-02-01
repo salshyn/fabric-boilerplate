@@ -65,24 +65,17 @@ exports.getThing = function(req, res) {
     Response:
         {  }
 */
-exports.addThing = function(req, res) {
-    console.log("-- Adding thing --")
+exports.addThing = function (req, res) {
+    console.log("-- Adding thing --");
 
     const functionName = "add_thing";
-    const args = [req.body.thingId, JSON.stringify(req.body.thing)];
+    const args = [req.body.id, JSON.stringify(req.body)];
 
-    console.log('----------------------------------------------------------');
-    console.log(functionName);
-    console.log(args);
-    console.log(req.userId);
-    console.log('----------------------------------------------------------');
-
-    //return false;
-
-    BlockchainService.invoke(functionName,args,req.userId).then(function(thing){
-        res.sendStatus(200);
-    }).catch(function(err){
-        console.log("Error", err);
-        res.sendStatus(500);
-    });
+    BlockchainService.invoke(functionName, args, req.userId)
+        .then(function (thing) {
+            res.sendStatus(200);
+        }).catch(function (err) {
+            console.log("Error", err);
+            res.sendStatus(500);
+        });
 };
