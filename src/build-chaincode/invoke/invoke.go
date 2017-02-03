@@ -104,10 +104,6 @@ func remove_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, erro
 	err := json.Unmarshal([]byte(args[1]), &item)
 	if err != nil { return nil, err }
 
-	// Save new thing
-	err = data.Save(stub, item)
-	if err != nil { return nil, err }
-
 	// Fetch user
 	var user data.User
 	err = utils.Get(stub, &user, args[2])
