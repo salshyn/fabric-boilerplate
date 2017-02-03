@@ -16,6 +16,7 @@ func main() {
 var Functions = map[string]func(shim.ChaincodeStubInterface,[]string)([]byte, error) {
     "add_user": add_user,
     "add_thing": add_thing,
+    "remove_thing": remove_thing,
     "add_test_data": add_test_data,
 }
 
@@ -115,15 +116,13 @@ func remove_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, erro
 	}
 
 	// Disattach thing id to user's Things
-	//user.Things = append(user.Things[:item.id], user.Things[:item.id + 1:])
-	//user.Things = append(user.Things[:item.Id], user.Things[item.Id+1:])
 
-	// for i, v := range user.Things {
-	//     if v == item.Id {
-	//         user.Things = append(user.Things[:i], user.Things[i+1:]...)
-	//         break
-	//     }
-	// }
+	for i, v := range user.Things {
+		if v == item.Id {
+			user.Things = append(user.Things[:i], user.Things[i+1:]...)
+			break
+		}
+	}
 
 	// Save user
 	return nil, data.Save(stub, user)
