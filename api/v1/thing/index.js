@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.getAllThings);
 router.get('/:thingId', controller.getThing);
-router.post('/', controller.addThing);
+router.post('/add', controller.addThing);
+router.post('/remove', controller.removeThing);
 
 module.exports = router;

@@ -40,10 +40,30 @@ app.service('ThingsService', ["$q", "$http", "$localStorage", function ($q, $htt
 
             $http({
                 method: 'POST',
-                url: '/api/v1/thing/',
+                url: '/api/v1/thing/add',
                 data: {
                   "id": $localStorage.thingToAdd.id,
                   "description": $localStorage.thingToAdd.description
+                }
+            }).then(function success(response) {
+                deferred.resolve(response.data);
+            }, function error(error) {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        },
+        removeThing: function () {
+            var deferred = $q.defer();
+
+            console.log("ThingsService -- Remove thing with id: ", $localStorage.thingToRemove.id);
+
+            $http({
+                method: 'POST',
+                url: '/api/v1/thing/remove',
+                data: {
+                  "id": $localStorage.thingToRemove.id,
+                  "description": $localStorage.thingToRemove.description
                 }
             }).then(function success(response) {
                 deferred.resolve(response.data);

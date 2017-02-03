@@ -14,4 +14,10 @@ app.controller("MasterController", ["things", "$localStorage", "$location", "Thi
         $localStorage.thingToAdd = thing;
         ThingsService.addThing();
     };
+
+    vm.removeThing = function(thing) {
+        console.log(thing);
+        $localStorage.thingToRemove = thing;
+        ThingsService.removeThing();
+    }
 }]);

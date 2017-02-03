@@ -96,3 +96,35 @@ func add_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) 
 	// Save user
 	return nil, data.Save(stub, user)
 }
+
+func remove_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	// Unmarshal JSON to Thing model
+	var item data.Thing
+	err := json.Unmarshal([]byte(args[1]), &item)
+	if err != nil { return nil, err }
+
+	// Save new thing
+	err = data.Save(stub, item)
+	if err != nil { return nil, err }
+
+	// Fetch user
+	var user data.User
+	err = utils.Get(stub, &user, args[2])
+	if err != nil {
+		return nil, errors.Wrap(err, "Could not get user "+args[2])
+	}
+
+	// Disattach thing id to user's Things
+	//user.Things = append(user.Things[:item.id], user.Things[:item.id + 1:])
+	//user.Things = append(user.Things[:item.Id], user.Things[item.Id+1:])
+
+	// for i, v := range user.Things {
+	//     if v == item.Id {
+	//         user.Things = append(user.Things[:i], user.Things[i+1:]...)
+	//         break
+	//     }
+	// }
+
+	// Save user
+	return nil, data.Save(stub, user)
+}

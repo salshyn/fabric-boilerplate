@@ -61,7 +61,7 @@ exports.getThing = function(req, res) {
     Add thing object
 
     METHOD: POST
-    URL: /api/v1/thing/
+    URL: /api/v1/thing/add
     Response:
         {  }
 */
@@ -69,6 +69,29 @@ exports.addThing = function (req, res) {
     console.log("-- Adding thing --");
 
     const functionName = "add_thing";
+    const args = [req.body.id, JSON.stringify(req.body), req.userId];
+
+    BlockchainService.invoke(functionName, args, req.userId)
+        .then(function (thing) {
+            res.sendStatus(200);
+        }).catch(function (err) {
+            console.log("Error", err);
+            res.sendStatus(500);
+        });
+};
+
+/*
+    Remove thing object
+
+    METHOD: POST
+    URL: /api/v1/thing/remove
+    Response:
+        {  }
+*/
+exports.removeThing = function (req, res) {
+    console.log("-- Removing thing -- in 'thing.controller.js'");
+
+    const functionName = "remove_thing";
     const args = [req.body.id, JSON.stringify(req.body), req.userId];
 
     BlockchainService.invoke(functionName, args, req.userId)

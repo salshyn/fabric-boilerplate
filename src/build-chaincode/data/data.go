@@ -16,7 +16,7 @@ func main() {
 
 var indexStrings = map[string]string{
 	"User":              "_users",
-    "Thing":             "_things",
+  "Thing":             "_things",
 }
 
 // Interface for saveable objects
@@ -33,7 +33,7 @@ type User struct {
 	Hash         string   `json:"hash"`
 	FirstName    string   `json:"firstName"`
 	LastName     string   `json:"lastName"`
-	Things      []string `json:"things"`
+	Things     []string 	`json:"things"`
 	Address      string   `json:"address"`
 	PhoneNumber  string   `json:"phoneNumber"`
 	EmailAddress string   `json:"emailAddress"`
