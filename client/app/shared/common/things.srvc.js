@@ -72,8 +72,24 @@ app.service('ThingsService', ["$q", "$http", "$localStorage", function ($q, $htt
             });
 
             return deferred.promise;
+        },
+        update: function () {
+            var deferred = $q.defer();
+
+            console.log("ThingsService -- Updating");
+
+            $http({
+                method: 'GET',
+                url: '/api/v1/thing/update'
+            }).then(function success(response) {
+                console.log('success');
+                deferred.resolve(response.data);
+            }, function error(error) {
+                console.log('failure');
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
         }
-
     }
-
 }])

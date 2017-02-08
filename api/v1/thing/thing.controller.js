@@ -93,6 +93,30 @@ exports.removeThing = function (req, res) {
 
     const functionName = "remove_thing";
     const args = [req.body.id, JSON.stringify(req.body), req.userId];
+    console.log(JSON.stringify(req.body));
+
+    BlockchainService.invoke(functionName, args, req.userId)
+        .then(function (thing) {
+            res.sendStatus(200);
+        }).catch(function (err) {
+            console.log("Error", err);
+            res.sendStatus(500);
+        });
+};
+
+/*
+    Update thing object
+
+    METHOD: GET
+    URL: /api/v1/thing/update
+    Response:
+        {  }
+*/
+exports.update = function (req, res) {
+    console.log("-- Updating things -- in 'thing.controller.js'");
+
+    const functionName = "update_things";
+    const args = [req.body.id, {"id":"11223344","description":"Piano Forte"}, req.userId];
 
     BlockchainService.invoke(functionName, args, req.userId)
         .then(function (thing) {

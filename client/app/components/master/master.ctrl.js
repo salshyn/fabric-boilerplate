@@ -1,4 +1,4 @@
-app.controller("MasterController", ["things", "$localStorage", "$location", "ThingsService", function (things, $localStorage, $location, ThingsService) {
+app.controller("MasterController", ["things", "$route", "$localStorage", "$location", "ThingsService", function (things, $route, $localStorage, $location, ThingsService) {
 
     var vm = this;
 
@@ -13,11 +13,20 @@ app.controller("MasterController", ["things", "$localStorage", "$location", "Thi
     vm.addThing = function(thing) {
         $localStorage.thingToAdd = thing;
         ThingsService.addThing();
+        //$state.reload();
+        // $location.path('/master');
+        // $route.reload();
     };
 
     vm.removeThing = function(thing) {
-        console.log(thing);
         $localStorage.thingToRemove = thing;
         ThingsService.removeThing();
+        //$state.reload();
+        // $location.path('/master');
+        // $route.reload();
+    }
+
+    vm.update = function() {
+        ThingsService.update();
     }
 }]);

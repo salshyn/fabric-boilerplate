@@ -18,6 +18,7 @@ var Functions = map[string]func(shim.ChaincodeStubInterface,[]string)([]byte, er
     "add_thing": add_thing,
     "remove_thing": remove_thing,
     "add_test_data": add_test_data,
+		"update_things": update_things,
 }
 
 // Invoke function.
@@ -111,14 +112,37 @@ func remove_thing(stub shim.ChaincodeStubInterface, args []string) ([]byte, erro
 		return nil, errors.Wrap(err, "Could not get user "+args[2])
 	}
 
-	// Disattach thing id to user's Things
-
+	// Disattach thing id from user's Things
 	for i, v := range user.Things {
 		if v == item.Id {
 			user.Things = append(user.Things[:i], user.Things[i+1:]...)
 			break
 		}
 	}
+
+	// Save user
+	return nil, data.Save(stub, user)
+}
+
+func update_things(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	// Unmarshal JSON to Thing model
+	var item data.Thing
+	err := json.Unmarshal([]byte(args[1]), &item)
+	if err != nil { return nil, err }
+
+	// Save new thing
+	err = data.Save(stub, item)
+	if err != nil { return nil, err }
+
+	// Fetch user
+	var user data.User
+	err = utils.Get(stub, &user, args[2])
+	if err != nil {
+		return nil, errors.Wrap(err, "Could not get user "+args[2])
+	}
+
+	// Attach thing id to user's Things
+	user.Things = append(user.Things, item.Id)
 
 	// Save user
 	return nil, data.Save(stub, user)

@@ -1,5 +1,7 @@
 <header-bar></header-bar>
 <div class="master-overview">
+
+    <button class="btn btn-primary" ng-click="master.update()">Update Assets</button>
     <table class="table table-striped table-bordered table-hover table-condensed" >
         <thead>
             <tr>
@@ -20,7 +22,7 @@
                     {{thing.id}}
                 </td>
                 <td ng-click="master.openThing(thing.id)">
-                    {{thing.description}}
+                    {{thing.description | currency}}
                 </td>
                 <td>
                     <button ng-click="master.removeThing(thing)">Remove</button>

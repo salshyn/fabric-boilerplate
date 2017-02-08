@@ -2,7 +2,7 @@
 <div class="details-page container">
 
     <p><b>ID:</b> {{detail.thing.id}}</p>
-    <p><b>Description:</b> {{detail.thing.description}}</p>
+    <p><b>Description:</b> {{detail.thing.description | currency}}</p>
 
     <button class="btn btn-primary btn-md" ng-click="detail.goBack()">Go Back</button></br>
 
