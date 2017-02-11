@@ -268,9 +268,13 @@ exports.invoke = function (fcn, args, enrollmentId, cb) {
             fcn: fcn,
             args: args
         };
+        logger.debug(invokeRequest);
+
 
         // Invoke the request from the user object.
         var tx = user.invoke(invokeRequest);
+
+        logger.debug('lalalalalalala2');
 
         tx.on("submitted", function(results) {
             logger.debug("[SDK] "+ enrollmentId +" submitted invoke function "+ fcn, args[0]);

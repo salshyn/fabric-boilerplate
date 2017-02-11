@@ -22,7 +22,6 @@ exports.query = function(functionName, args, enrollmentId){
 };
 
 exports.invoke = function(functionName, args, enrollmentId){
-    logger.debug(enrollmentId);
     return new Promise(function(resolve, reject){
         args.filter(function(arg, i) {
             if (arg == null) {

@@ -5,7 +5,7 @@ const logger        = require('./utils/logger');
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
 
-const port = (process.env.VCAP_APP_PORT || 8080);
+const port = (process.env.VCAP_APP_PORT || 8081);
 const host = (process.env.VCAP_APP_HOST || 'localhost');
 
 const app = express();

@@ -79,7 +79,7 @@ app.service('ThingsService', ["$q", "$http", "$localStorage", function ($q, $htt
             console.log("ThingsService -- Updating");
 
             $http({
-                method: 'GET',
+                method: 'POST',
                 url: '/api/v1/thing/update'
             }).then(function success(response) {
                 console.log('success');
